@@ -10,6 +10,11 @@ class ImageConverter:
         inverted_image = ImageOps.invert(image.convert("RGB"))
         return self._transform_to_bytes(inverted_image)
 
+    def rotate(self, angle):
+        image = Image.open(self._file)
+        rotated_image = image.rotate(angle=angle)
+        return self._transform_to_bytes(rotated_image)
+
     def _transform_to_bytes(self, image):
         buffer = BytesIO()
         image.save(buffer, format="png")
