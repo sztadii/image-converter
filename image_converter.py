@@ -2,14 +2,15 @@ from PIL import Image, ImageOps
 from io import BytesIO
 
 class ImageConverter:
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, _file):
+        self._file = _file
 
     def invert(self):
-        image = Image.open(self.file)
+        image = Image.open(self._file)
         inverted_image = ImageOps.invert(image.convert("RGB"))
+        return self._transform_to_bytes(inverted_image)
 
+    def _transform_to_bytes(self, image):
         buffer = BytesIO()
-        inverted_image.save(buffer, format="png")
-        image_bytes = buffer.getvalue()
-        return image_bytes
+        image.save(buffer, format="png")
+        return buffer.getvalue()
