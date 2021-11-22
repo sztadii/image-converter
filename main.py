@@ -1,18 +1,13 @@
 from fastapi import FastAPI, UploadFile, File, Response
-from PIL import Image, ImageOps
 import uvicorn
-from io import BytesIO
+from image_converter import ImageConverter
 
 app = FastAPI()
 
 @app.post("/invert")
 async def invert_image(file: UploadFile = File(...)):
-    image = Image.open(file.file)
-    inverted_image = ImageOps.invert(image.convert("RGB"))
-
-    buffer = BytesIO()
-    inverted_image.save(buffer, format="png")
-    image_bytes = buffer.getvalue()
+    converter = ImageConverter(file.file)
+    image_bytes = converter.invert()
 
     return Response(content=image_bytes, media_type="image/png")
 
