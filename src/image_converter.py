@@ -4,7 +4,9 @@ from io import BytesIO
 class ImageConverter:
     def __init__(self, file):
         self._image = Image.open(file)
-        # PIL package has some issues and when we do any image operation when we lose format property
+        # PIL package has an issue
+        # when we run an image operation ( like .rotate )
+        # then we lose a format property
         self._format = self._image.format
 
     def invert(self):
