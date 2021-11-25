@@ -23,4 +23,12 @@ async def rotate_image(angle: int, file: UploadFile = File(...)):
 
     return Response(image_bytes)
 
+@app.post("/mirror")
+async def mirror_image(file: UploadFile = File(...)):
+    converter = ImageConverter(file.file)
+    converter.mirror()
+    image_bytes = converter.get_image_bytes()
+
+    return Response(image_bytes)
+
 

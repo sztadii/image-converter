@@ -11,6 +11,9 @@ class ImageConverter:
     def rotate(self, angle):
         self._image = self._image.rotate(angle=angle)
 
+    def mirror(self):
+        self._image = ImageOps.mirror(self._image)
+
     def get_image_bytes(self):
         buffer = BytesIO()
         self._image.save(buffer, format="png")
