@@ -50,3 +50,11 @@ def test_when_file_was_send_then_mirror_image():
     mirrored_image_from_response = response.content
 
     assert mirrored_image_sample == mirrored_image_from_response
+
+# Tools like Postman will handle missing content-type header, but Swagger will not
+def test_when_file_was_send_properly_then_return_image_header():
+    image = open_file("images/image.png")
+    response = client.post("/mirror", files={"file": image})
+    content_type_header = response.headers["content-type"]
+
+    assert content_type_header == "image/png"
