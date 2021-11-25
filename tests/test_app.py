@@ -29,7 +29,7 @@ def test_when_file_was_send_then_invert_image_colors():
 
     assert inverted_image_sample == inverted_image_from_response
 
-def test_when_file_was_send_when_rotate_image():
+def test_when_file_was_send_then_rotate_image():
     image = open_file("images/image.png")
     rotated_image_sample = open_file("images/image_180_deg.png").read()
     response = client.post("/rotate/180", files={"file": image})
