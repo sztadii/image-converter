@@ -1,0 +1,19 @@
+name: Main workflow
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+
+      - name: Dependency instalation
+        run: pip install -r requirements
+
+      - name: Run the tests
+        run: pytest
