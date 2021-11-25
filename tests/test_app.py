@@ -26,6 +26,16 @@ def test_invert_image():
 
     assert inverted_image_sample == inverted_image_from_response
 
+def test_rotate_image():
+    client = TestClient(app)
+
+    image = open_file("images/image.png")
+    rotated_image_sample = open_file("images/image_180_deg.png").read()
+    response = client.post("/rotate/180", files={"file": image})
+    rotated_image_from_response = response.content
+
+    assert rotated_image_sample == rotated_image_from_response
+
 # To run pytest from the root then we need to use absolute path
 # To open file easier we can use below function
 def open_file(path: str):
