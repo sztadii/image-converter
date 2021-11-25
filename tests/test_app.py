@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from src.app import app
-import os
+from tests.helpers import open_file
 
 def test_throw_the_error_when_the_image_is_missing():
     client = TestClient(app)
@@ -35,10 +35,3 @@ def test_rotate_image():
     rotated_image_from_response = response.content
 
     assert rotated_image_sample == rotated_image_from_response
-
-# To run pytest from the root then we need to use absolute path
-# To open file easier we can use below function
-def open_file(path: str):
-    current_dir = os.path.dirname(__file__)
-    absolute_path = os.path.join(current_dir, path)
-    return open(absolute_path, "rb")
