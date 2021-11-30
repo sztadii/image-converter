@@ -18,6 +18,9 @@ class ImageConverter:
     def mirror(self):
         self._image = ImageOps.mirror(self._image)
 
+    def grayscale(self):
+        self._image = ImageOps.grayscale(self._image)
+
     def get_image_bytes(self):
         buffer = BytesIO()
         self._image.save(buffer, format=self._format)
