@@ -51,6 +51,20 @@ def test_when_file_was_send_then_mirror_image():
 
     assert mirrored_image_sample == mirrored_image_from_response
 
+def test_when_file_to_grayscale_was_send_properly_then_return_200_code():
+    image = open_file("images/image.png")
+    response = client.post("/mirror", files={"file": image})
+
+    assert response.status_code == 200
+
+def test_when_file_was_send_then_grayscale_image():
+    image = open_file("images/image.png")
+    grayscale_image_sample = open_file("images/image_gray.png").read()
+    response = client.post("/grayscale", files={"file": image})
+    grayscale_image_from_response = response.content
+
+    assert grayscale_image_sample == grayscale_image_from_response
+
 # Tools like Postman will handle missing content-type header, but Swagger will not
 def test_when_file_was_send_properly_then_return_image_header():
     image = open_file("images/image.png")

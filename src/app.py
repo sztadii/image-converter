@@ -27,6 +27,14 @@ async def mirror_image(file: UploadFile = File(...)):
 
     return to_image_response(file.filename, image_bytes)
 
+@app.post("/grayscale")
+async def grayscale_image(file: UploadFile = File(...)):
+    converter = ImageConverter(file.file)
+    converter.grayscale()
+    image_bytes = converter.get_image_bytes()
+
+    return to_image_response(file.filename, image_bytes)
+
 def to_image_response(filename: str, image_bytes: bytes):
     file_format = filename.split(".")[1]
     media_type = f"image/{file_format}"
