@@ -1,11 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, Response
 from src.image_converter import ImageConverter
 
-app = FastAPI()
-
-@app.get("/")
-async def index():
-    return "image-converter"
+app = FastAPI(docs_url="/")
 
 @app.post("/invert")
 async def invert_image(file: UploadFile = File(...)):
