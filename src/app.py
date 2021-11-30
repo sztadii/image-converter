@@ -4,7 +4,7 @@ from src.image_converter import ImageConverter
 app = FastAPI(docs_url="/")
 
 @app.post("/invert")
-async def invert_image(file: UploadFile = File(...)):
+def invert_image(file: UploadFile = File(...)):
     converter = ImageConverter(file.file)
     converter.invert()
     image_bytes = converter.get_image_bytes()
@@ -12,7 +12,7 @@ async def invert_image(file: UploadFile = File(...)):
     return to_image_response(file.filename, image_bytes)
 
 @app.post("/rotate/{angle}")
-async def rotate_image(angle: int, file: UploadFile = File(...)):
+def rotate_image(angle: int, file: UploadFile = File(...)):
     converter = ImageConverter(file.file)
     converter.rotate(angle)
     image_bytes = converter.get_image_bytes()
@@ -20,7 +20,7 @@ async def rotate_image(angle: int, file: UploadFile = File(...)):
     return to_image_response(file.filename, image_bytes)
 
 @app.post("/mirror")
-async def mirror_image(file: UploadFile = File(...)):
+def mirror_image(file: UploadFile = File(...)):
     converter = ImageConverter(file.file)
     converter.mirror()
     image_bytes = converter.get_image_bytes()
@@ -28,7 +28,7 @@ async def mirror_image(file: UploadFile = File(...)):
     return to_image_response(file.filename, image_bytes)
 
 @app.post("/grayscale")
-async def grayscale_image(file: UploadFile = File(...)):
+def grayscale_image(file: UploadFile = File(...)):
     converter = ImageConverter(file.file)
     converter.grayscale()
     image_bytes = converter.get_image_bytes()
