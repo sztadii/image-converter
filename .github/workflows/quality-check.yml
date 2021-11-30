@@ -1,9 +1,6 @@
 name: Quality check
 
-on:
-  push:
-    branches-ignore:
-      - main
+on: push
 
 jobs:
   check-quality:
